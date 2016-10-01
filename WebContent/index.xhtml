@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<!-- Compiled and minified CSS -->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" />
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="WebContent/js/materialize.js"></script>
+	<!-- Compiled and minified JavaScript -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+</h:head>
+
+<h:body>
+	<h:form id="formproduct">
+		<div class="row">
+			<!-- 		<div class="input-field col s6"> -->
+			<!-- 			<input value="" id="first_name2" type="text" class="validate" /><label -->
+			<!-- 				class="active" for="first_name2">Tipo producto</label> -->
+			<!-- 		</div> -->
+			<p:outputLabel for="product" styleClass="active"
+				value="Tipo producto"></p:outputLabel>
+			<h:inputText id="product" styleClass="input-field col s6"
+				value="#{prueba.type_name}"></h:inputText>
+		</div>
+
+		<h:commandLink value="login " styleClass="btn btn-large"
+			action="#{ct_tp.AgregarTp(prueba)}"></h:commandLink>
+	</h:form>
+
+</h:body>
+</html>
