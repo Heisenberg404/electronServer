@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Principal User</title>
+</h:head>
+<h:body>
+	<p:panel header="Principal Menu Users" style="height:100%;width:100%">
+		<p:messages />
+
+		<div class="row" align="center">
+			<p:growl id="mensajeGeneral" autoUpdate="true" sticky="false"
+				showDetail="true" life="3000" />
+
+			<h:form>
+				<p:commandButton value="Create user"
+					action="#{ControllerUser.saveUser(userServer)}"
+					oncomplete="PF('dlgNuevo').show();" update=":formCreate"
+					style="font-size: 14px;" />
+			</h:form>
+
+			<p:dialog id="dlgN" header="New User" widgetVar="dlgNuevo"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formCreate">
+					<p:panelGrid id="gridCreate" columns="2"
+						style="margin: 0 auto; font-size: 12px;">
+
+						<p:outputLabel value="Username:" />
+						<p:inputText value="#{userServer.username}"
+							required="true" requiredMessage="Nombres es oblligatorio" />
+
+						<p:outputLabel value="Password" />
+						<p:password id="nonFeedback"
+							value="#{userServer.pass}" required="true"
+							requiredMessage="Apellidos es oblligatorio" />
+
+
+						<p:outputLabel value="Complete name:" />
+						<p:inputText value="#{userServer.complete_name}"
+							required="true" requiredMessage="Direccion es oblligatorio" />
+
+
+
+						<p:outputLabel value="Last name:" />
+						<p:inputText value="#{userServer.last_name}" />
+
+
+						<p:outputLabel value="Email:" />
+						<p:inputText value="#{userServer.email}" />
+
+
+						<p:outputLabel value="Telefono:" />
+						<p:inputText value="#{userServer.number}" />
+
+						<p:commandButton value="Guardar"
+							action="#{ControllerUser.saveUser(userServer)}"
+							oncomplete="PF('dlgNuevo').hide();"
+							update=":formShowUsers:tableShowUsers" />
+
+						<p:commandButton value="Cancelar"
+							actionListener="#{empleadoBean.cancelar()}" update=":formCreate"
+							immediate="true" onclick="PF('dlgNuevo').hide();" />
+
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+
+			<p:separator />
+
+			<h:form id="formShowUsers">
+				<p:dataTable id="tableShowUsers" var="emp"
+					value="#{ControllerUser.listar}"
+					emptyMessage="No hay datos de empleados" style="font-size: 12px;">
+
+					<p:column headerText="Identification code">
+						<h:outputText value="#{USERS.ID_USER}" />
+					</p:column>
+
+					<p:column headerText="Username">
+						<h:outputText value="#{USERS.USERNAME}" />
+					</p:column>
+
+					<p:column headerText="Password">
+						<h:outputText value="#{USERS.PASS}" />
+					</p:column>
+
+					<p:column headerText="Complete name">
+						<h:outputText value="#{USERS.COMPLETE_NAME}" />
+					</p:column>
+
+					<p:column headerText="Last name">
+						<h:outputText value="#{USERS.LAST_NAME}" />
+					</p:column>
+					
+					
+					<p:column headerText="Email">
+						<h:outputText value="#{USERS.EMAIL}" />
+					</p:column>
+					
+					<p:column headerText="Telephone">
+						<h:outputText value="#{USERS.TELEPHONE}" />
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandButton value="Update"
+							oncomplete="PF('dlgModificar').show();" update=":formUpdate">
+							<f:setPropertyActionListener target="#{empleadoBean.empleado}"
+								value="#{emp}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandButton value="Eliminar"
+							oncomplete="PF('dlgEliminar').show();" update=":formEliminar">
+							<f:setPropertyActionListener target="#{empleadoBean.empleado}"
+								value="#{emp}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+
+
+			<p:dialog id="dlg" header="Modificar Datos" widgetVar="dlgModificar"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formUpdate">
+					<p:panelGrid columns="2" style="margin: 0 auto; font-size: 12px;">
+
+						<p:outputLabel value="Username:" />
+						<p:inputText value="#{empleadoBean.empleado.nombres}"
+							required="true" requiredMessage="Nombres es oblligatorio" />
+
+						<p:outputLabel value="Password" />
+						<p:password id="nonFeedback"
+							value="#{empleadoBean.empleado.apellidos}" required="true"
+							requiredMessage="Apellidos es oblligatorio" />
+
+
+						<p:outputLabel value="Complete name:" />
+						<p:inputText value="#{empleadoBean.empleado.direccion}"
+							required="true" requiredMessage="Direccion es oblligatorio" />
+
+
+
+						<p:outputLabel value="Last name:" />
+						<p:inputText value="#{empleadoBean.empleado.codigoArea}" />
+
+
+						<p:outputLabel value="Email:" />
+						<p:inputText value="#{empleadoBean.empleado.codigoArea}" />
+
+
+						<p:outputLabel value="Telefono:" />
+						<p:inputText value="#{empleadoBean.empleado.telefono}" />
+
+
+						<p:commandButton value="Save"
+							actionListener="#{empleadoBean.modificarEmpleado()}"
+							update=":formShowUsers:tableShowUsers"
+							oncomplete="PF('dlgModificar').hide();" />
+						<p:commandButton value="Cancel"
+							onclick="PF('dlgModificar').hide();" immediate="true" />
+
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+
+
+			<p:dialog id="dlg2" header="Eliminar Datos" widgetVar="dlgEliminar"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formEliminar" style="font-size: 12px;">
+					<h:outputText value="Desea eliminar este registro?" />
+					<p:commandButton value="Si"
+						actionListener="#{empleadoBean.eliminarEmpleado()}"
+						update=":formShowUsers" oncomplete="PF('dlgEliminar').hide();" />
+					<p:commandButton value="No" onclick="PF('dlgEliminar').hide();" />
+				</h:form>
+			</p:dialog>
+		</div>
+		<p:dock position="bottom" halign="center">
+			<p:menuitem value="User" icon="/Views/Image/user.png" url="#" />
+			<p:menuitem value="Products" icon="/Views/Image/products.png" url="#" />
+			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
+				url="#" />
+			<p:menuitem value="Product Reference"
+				icon="/Views/Image/references.png" url="#" />
+		</p:dock>
+	</p:panel>
+</h:body>
+</html>
+
