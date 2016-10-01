@@ -1,0 +1,202 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<p:panel header="Principal Menu" style="height:100%;width:100%">
+
+		<div class="row" align="center">
+
+			<p:growl id="mensajeGeneral" autoUpdate="true" sticky="false"
+				showDetail="true" life="3000" />
+
+			<h:form>
+				<p:commandButton value="New Product"
+					actionListener="#{empleadoBean.preparNuevoEmpleado(actionEvent)}"
+					oncomplete="PF('dlgNuevo').show();" update=":formInsertar"
+					style="font-size: 14px;" />
+			</h:form>
+
+			<p:dialog id="dlgN" header="New Product" widgetVar="dlgNuevo"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formInsertar">
+					<p:panelGrid id="gridInsertar" columns="2"
+						style="margin: 0 auto; font-size: 12px;">
+
+						<p:outputLabel value="Product Name" />
+						<p:inputText value=""
+							required="true" requiredMessage="Product name is required" />
+
+						<p:outputLabel value="Reference" />
+						<p:selectOneMenu id="pais"
+							value="#{empleadoBean.empleado.tbpais.idPais}" required="true"
+							requiredMessage="Select a Reference">
+							<f:selectItem itemLabel="-- Select --" itemValue="" />
+							<f:selectItems value="" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Product Type" />
+						<p:selectOneMenu id="departamento"
+							value="#{empleadoBean.empleado.tbdepartamento.idDepartamento}"
+							required="true" requiredMessage="Select a Product Type">
+							<f:selectItem itemLabel="-- Select --" />
+							<f:selectItems value="" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Quantity" />
+						<p:inputText value="" />
+						
+						<p:outputLabel value="Active" />
+						<p:selectOneMenu id="active"
+							required="true" requiredMessage="Select a check">
+							<f:selectItem itemLabel="-- Select --" />
+							<f:selectItem itemLabel="Yes" itemValue="1"/>
+							<f:selectItem itemLabel="No" itemValue="2"/>
+						</p:selectOneMenu>
+
+						<p:commandButton value="Save"
+							actionListener="#{empleadoBean.nuevoEmpleado()}"
+							oncomplete="PF('dlgNuevo').hide();"
+							update=":formShowProduct:TableShowProduct" />
+
+						<p:commandButton value="Cancel"
+							actionListener="#{empleadoBean.cancelar()}"
+							update=":formInsertar" immediate="true"
+							onclick="PF('dlgNuevo').hide();" />
+
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+
+			<p:separator />
+
+			<h:form id="formShowProduct">
+				<p:dataTable id="TableShowProduct" var="emp"
+					value="#{empleadoBean.listar}"
+					emptyMessage="No hay datos de empleados" style="font-size: 12px;">
+
+					<p:column headerText="Product Name">
+						<h:outputText value="#{emp.idEmpleado}" />
+					</p:column>
+
+					<p:column headerText="Reference">
+						<h:outputText value="#{emp.nombres} #{emp.apellidos}" />
+					</p:column>
+
+					<p:column headerText="Product Type">
+						<h:outputText value="#{emp.tbpais.nombrePais}" />
+					</p:column>
+
+					<p:column headerText="Quantity">
+						<h:outputText value="#{emp.tbdepartamento.nombreDepartamento}" />
+					</p:column>
+
+					<p:column headerText="Active">
+						<h:outputText value="#{emp.tbmunicipio.nombreMunicipio}" />
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandButton value="Update"
+							oncomplete="PF('dlgModificar').show();" update=":formModificar">
+							<f:setPropertyActionListener target="#{empleadoBean.empleado}"
+								value="#{emp}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandButton value="Delete"
+							oncomplete="PF('dlgEliminar').show();" update=":formEliminar">
+							<f:setPropertyActionListener target="#{empleadoBean.empleado}"
+								value="#{emp}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+
+
+			<p:dialog id="dlg" header="Modificar Datos" widgetVar="dlgModificar"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formModificar">
+					<p:panelGrid columns="2" style="margin: 0 auto; font-size: 12px;">
+
+						<p:outputLabel value="Product Name" />
+						<p:inputText value=""
+							required="true" requiredMessage="Product name is required" />
+
+						<p:outputLabel value="Reference" />
+						<p:selectOneMenu id="pais"
+							value="#{empleadoBean.empleado.tbpais.idPais}" required="true"
+							requiredMessage="Select a Reference">
+							<f:selectItem itemLabel="-- Select --" itemValue="" />
+							<f:selectItems value="" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Product Type" />
+						<p:selectOneMenu id="departamento"
+							value="#{empleadoBean.empleado.tbdepartamento.idDepartamento}"
+							required="true" requiredMessage="Select a Product Type">
+							<f:selectItem itemLabel="-- Select --" />
+							<f:selectItems value="" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Quantity" />
+						<p:inputText value="" />
+						
+						<p:outputLabel value="Active" />
+						<p:selectOneMenu id="active"
+							required="true" requiredMessage="Select a check">
+							<f:selectItem itemLabel="-- Select --" />
+							<f:selectItem itemLabel="Yes" itemValue="1"/>
+							<f:selectItem itemLabel="No" itemValue="2"/>
+						</p:selectOneMenu>
+
+						<p:commandButton value="Guardar Cambios"
+							actionListener="#{empleadoBean.modificarEmpleado()}"
+							update=":formShowProduct:TableShowProduct"
+							oncomplete="PF('dlgModificar').hide();" />
+						<p:commandButton value="Cancelar"
+							onclick="PF('dlgModificar').hide();" immediate="true" />
+
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+
+
+			<p:dialog id="dlg2" header="Eliminar Datos" widgetVar="dlgEliminar"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formEliminar" style="font-size: 12px;">
+					<h:outputText value="Desea eliminar este registro?" />
+					<p:commandButton value="Si"
+						actionListener="#{empleadoBean.eliminarEmpleado()}"
+						update=":formShowProduct"
+						oncomplete="PF('dlgEliminar').hide();" />
+					<p:commandButton value="No" onclick="PF('dlgEliminar').hide();" />
+				</h:form>
+			</p:dialog>
+
+		</div>
+
+		<p:dock position="bottom" halign="center">
+			<p:menuitem value="User" icon="/Views/Image/user.png" url="#" />
+			<p:menuitem value="Products" icon="/Views/Image/products.png" url="#" />
+			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
+				url="#" />
+			<p:menuitem value="Product Reference"
+				icon="/Views/Image/references.png" url="#" />
+		</p:dock>
+
+	</p:panel>
+
+</h:body>
+</html>
