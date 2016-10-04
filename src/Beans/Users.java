@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean(name = "usersServer")
 public class Users implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private Integer id_users;
 
 	public Users(Integer id_users, String username, String pass, String complete_name, String last_name, String email,

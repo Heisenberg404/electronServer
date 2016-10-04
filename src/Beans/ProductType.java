@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean(name = "product_type")
 public class ProductType implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer id_product_type;
 
 	public ProductType(Integer id_product_type, String type_name) {

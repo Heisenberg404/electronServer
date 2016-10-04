@@ -2,8 +2,14 @@ package Model;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import Beans.Products;
 import Utils.Conection;
+import oracle.jdbc.OracleTypes;
 
 
 public class MdProducts {
@@ -13,12 +19,12 @@ public class MdProducts {
 	public MdProducts()
 	{
 		super();
-	}
-
-	public void saveReference(Products prod) throws Exception {
+	}	
+	
+	public void saveProducts(Products prod) throws Exception {
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
-		cs = con.prepareCall("{call PKG_PRODUCTS.create_PRODUCTS(?,?,?,?,?,?)}");
+		cs = con.prepareCall("{call PKG_PRODUCTS.Create_PRODUCTS(?,?,?,?,?,?)}");
 		 // Parametros del procedimiento almacenado
 		cs.setString(1, prod.getProduct_name());
 		cs.setInt(2, prod.getId_reference());
@@ -31,7 +37,35 @@ public class MdProducts {
 		// Se obtienen la salida del procedimineto almacenado
         String back = cs.getString(6);
         System.out.println(back);
-
 	}
+	
+	public List<Products> ReadProduct()throws Exception{
+		List<Products> lstProducts = new ArrayList<Products>();
+		Connection con = conn.getConnection();
+		CallableStatement cs = null;
+		ResultSet rs = null;
+		cs = con.prepareCall("{call PKG_PRODUCTS.Read_PRODUCTS(?)}");
+		cs.registerOutParameter(1, OracleTypes.CURSOR);
+		cs.execute();
+		rs = (ResultSet) cs.getObject(1);
+		
+		while (rs.next()) 
+		{
+			Products pr = new Products();
+			
+			pr.setId_product(rs.getInt("ID_PRODUCT"));
+			pr.setProduct_name(rs.getString("PRODUCT_NAME"));
+			pr.setId_reference(rs.getInt("ID_REFERENCE"));
+			pr.setId_product_type(rs.getInt("ID_PRODUCT_TYPE"));
+			pr.setQuantity(rs.getInt("QUANTITY"));
+			pr.setActive(rs.getInt("ACTIVE"));
+			
+			lstProducts.add(pr);
+		}
+		
+		return lstProducts;
+		
+	}	
+	
 	
 }

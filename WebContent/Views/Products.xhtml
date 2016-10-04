@@ -31,23 +31,25 @@
 						style="margin: 0 auto; font-size: 12px;">
 
 						<p:outputLabel value="Product Name" />
-						<p:inputText value=""
+						<p:inputText value="#{products.product_name}"
 							required="true" requiredMessage="Product name is required" />
 
 						<p:outputLabel value="Reference" />
-						<p:selectOneMenu id="pais"
-							value="#{empleadoBean.empleado.tbpais.idPais}" required="true"
+						<p:selectOneMenu id="reference"
+							value="#{products.id_reference}" required="true"
 							requiredMessage="Select a Reference">
 							<f:selectItem itemLabel="-- Select --" itemValue="" />
-							<f:selectItems value="" />
+							<f:selectItems value="#{rfproductsController.lstReferenceProduct}" 
+							               var="ref" itemValue="#{ref.id_reference}" itemLabel="#{ref.id_reference}"/>
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Product Type" />
-						<p:selectOneMenu id="departamento"
-							value="#{empleadoBean.empleado.tbdepartamento.idDepartamento}"
+						<p:selectOneMenu id="productTye"
+							value="#{product_type.id_product_type}"
 							required="true" requiredMessage="Select a Product Type">
 							<f:selectItem itemLabel="-- Select --" />
-							<f:selectItems value="" />
+							<f:selectItems value="#{pt_controller.lstProductType}" var="pt"
+										   itemLabel="#{pt.type_name}" itemValue="#{pt.id_product_type}"/>
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Quantity" />
@@ -62,7 +64,7 @@
 						</p:selectOneMenu>
 
 						<p:commandButton value="Save"
-							actionListener="#{empleadoBean.nuevoEmpleado()}"
+							action="#{productsController.saveProduct()}"
 							oncomplete="PF('dlgNuevo').hide();"
 							update=":formShowProduct:TableShowProduct" />
 
@@ -79,27 +81,27 @@
 
 			<h:form id="formShowProduct">
 				<p:dataTable id="TableShowProduct" var="emp"
-					value="#{empleadoBean.listar}"
+					value="#{productsController.lstProducts}"
 					emptyMessage="No hay datos de empleados" style="font-size: 12px;">
 
 					<p:column headerText="Product Name">
-						<h:outputText value="#{emp.idEmpleado}" />
+						<h:outputText value="#{emp.product_name}" />
 					</p:column>
 
 					<p:column headerText="Reference">
-						<h:outputText value="#{emp.nombres} #{emp.apellidos}" />
+						<h:outputText value="#{emp.id_reference}" />
 					</p:column>
 
 					<p:column headerText="Product Type">
-						<h:outputText value="#{emp.tbpais.nombrePais}" />
+						<h:outputText value="#{emp.id_product_type}" />
 					</p:column>
 
 					<p:column headerText="Quantity">
-						<h:outputText value="#{emp.tbdepartamento.nombreDepartamento}" />
+						<h:outputText value="#{emp.quantity}" />
 					</p:column>
 
 					<p:column headerText="Active">
-						<h:outputText value="#{emp.tbmunicipio.nombreMunicipio}" />
+						<h:outputText value="#{emp.active}" />
 					</p:column>
 
 					<p:column headerText="">

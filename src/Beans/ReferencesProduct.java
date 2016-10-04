@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean(name = "references_product")
 public class ReferencesProduct implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public ReferencesProduct(Integer id_reference, String brand, float price, String description) {
 		super();
 		this.id_reference = id_reference;
