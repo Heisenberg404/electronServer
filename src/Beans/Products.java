@@ -9,7 +9,7 @@ public class Products implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id_product;
+	private int id_product;
 
 	private String product_name;
 
@@ -17,7 +17,7 @@ public class Products implements Serializable {
 
 	}
 
-	public Products(Integer id_product, String product_name, int id_reference, int id_product_type, int quantity,
+	public Products(int id_product, String product_name, int id_reference, int id_product_type, int quantity,
 			int active) {
 		super();
 		this.id_product = id_product;
@@ -35,11 +35,11 @@ public class Products implements Serializable {
 				+ active + "]";
 	}
 
-	public Integer getId_product() {
+	public int getId_product() {
 		return id_product;
 	}
 
-	public void setId_product(Integer id_product) {
+	public void setId_product(int id_product) {
 		this.id_product = id_product;
 	}
 

@@ -44,6 +44,16 @@ public class ProductsController implements Serializable {
 
 		lstProducts = mdproducts.ReadProduct();
 	}
+	
+	public void updateProduct(Products prod)
+	{
+		try {
+			mdproducts.updateProducts(prod);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@PostConstruct
 	public void init() {

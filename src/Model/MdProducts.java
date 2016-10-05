@@ -67,5 +67,22 @@ public class MdProducts {
 		
 	}	
 	
-	
+	public void updateProducts(Products prod) throws Exception {
+		Connection con = conn.getConnection();
+		CallableStatement cs = null;
+		cs = con.prepareCall("{call PKG_PRODUCTS.Update_PRODUCTS(?,?,?,?,?,?,?)}");
+		 // Parametros del procedimiento almacenado	
+		cs.setInt(1, prod.getId_product());
+		cs.setString(2, prod.getProduct_name());
+		cs.setInt(3, prod.getId_reference());
+		cs.setInt(4, prod.getId_product_type());
+		cs.setInt(5, prod.getQuantity());
+		cs.setInt(6, prod.getActive());		
+		// Definimos los tipos de los parametros de salida del procedimiento almacenado
+        cs.registerOutParameter(7, java.sql.Types.VARCHAR);
+		cs.execute();
+		// Se obtienen la salida del procedimineto almacenado
+        String back = cs.getString(7);
+        System.out.println(back);
+	}
 }

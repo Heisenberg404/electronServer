@@ -17,7 +17,7 @@
 
 			<h:form>
 				<p:commandButton value="Create user"
-					action="#{ControllerUser.saveUser(userServer)}"
+					actionListener="#{ControllerUser.saveUser(userServer)}"
 					oncomplete="PF('dlgNuevo').show();" update=":formCreate"
 					style="font-size: 14px;" />
 			</h:form>
