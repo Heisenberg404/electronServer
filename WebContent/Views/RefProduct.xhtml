@@ -1,0 +1,170 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<p:panel header="Principal Menu" style="height:100%;width:100%">
+
+		<div class="row" align="center">
+
+			<p:growl id="mensajeGeneral" autoUpdate="true" sticky="false"
+				showDetail="true" life="3000" />
+
+			<h:form>
+				<p:commandButton value="New Reference Product"
+					oncomplete="PF('dlgNuevo').show();" update=":formInsertar"
+					style="font-size: 14px;" />
+			</h:form>
+
+			<p:dialog id="dlgN" header="New Reference Product" widgetVar="dlgNuevo"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formInsertar">
+					<p:panelGrid id="gridInsertar" columns="2"
+						style="margin: 0 auto; font-size: 12px;">
+
+						<p:outputLabel value="Brand" />
+						<p:inputText value="#{references_product.brand}" required="true"
+							requiredMessage="Brand is required" />
+					
+						<p:outputLabel value="Price" />
+						<p:inputText value="#{references_product.price}" required="true"
+							requiredMessage="Price name is required" />
+
+						<p:outputLabel value="Description" />
+						<p:inputTextarea rows="5" cols="30" 
+							maxlength="50" counterTemplate="{0} characters remaining."
+							autoResize="false" value="#{references_product.description}" />
+
+						<p:commandButton value="Save"
+							action="#{rfproductsController.saveRefProduct(references_product)}"
+							oncomplete="PF('dlgNuevo').hide();"
+							update=":formShowProduct:TableShowRefProduct">
+						</p:commandButton>
+
+						<p:commandButton value="Cancel"
+							actionListener="#{empleadoBean.cancelar()}"
+							update=":formInsertar" immediate="true"
+							onclick="PF('dlgNuevo').hide();" />
+
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+
+			<p:separator />
+
+			<h:form id="formShowProduct">
+				<p:dataTable id="TableShowRefProduct" var="emp"
+					value="#{rfproductsController.lstReferenceProduct}"
+					emptyMessage="No hay datos de empleados" style="font-size: 12px;"
+					paginator="true" paginatorPosition="bottom" rows="10">
+
+					<p:column headerText="Reference Product id" visible="false">
+						<h:outputText value="#{emp.id_reference}" />
+					</p:column>
+
+					<p:column headerText="Brand">
+						<h:outputText value="#{emp.brand}" />
+					</p:column>
+
+					<p:column headerText="Price">
+						<h:outputText value="#{emp.price}" />
+					</p:column>
+
+					<p:column headerText="Description">
+						<h:outputText value="#{emp.description}" />
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandButton value="Update"
+							oncomplete="PF('dlgModificar').show();" update=":formModificar">
+							<f:setPropertyActionListener target="#{references_product}" value="#{emp}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandButton value="Delete"
+							oncomplete="PF('dlgEliminar').show();" update=":formEliminar">
+							<f:setPropertyActionListener target="#{references_product}" value="#{emp}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+
+
+			<p:dialog id="dlg" header="Modificar Datos" widgetVar="dlgModificar"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formModificar">
+					<p:panelGrid columns="2" style="margin: 0 auto; font-size: 12px;">
+
+						<p:outputLabel value="Reference Product ID" />
+						<p:inputText value="#{references_product.id_reference}"
+							readonly="#{facesContext.renderResponse}" />
+
+						<p:outputLabel value="Brand" />
+						<p:inputText value="#{references_product.brand}" required="true"
+							requiredMessage="Product name is required" />
+
+						<p:outputLabel value="Price" />
+						<p:inputText value="#{references_product.price}" required="true"
+							requiredMessage="Price name is required" />
+
+						<p:outputLabel value="Description" />
+						<p:inputTextarea rows="5" cols="30" 
+							maxlength="50" counterTemplate="{0} characters remaining."
+							autoResize="false" value="#{references_product.description}" />					
+
+						
+						<p:commandButton value="Guardar Cambios"
+							action="#{rfproductsController.updateRefProduct(references_product)}"
+							update=":formShowProduct:TableShowRefProduct"
+							oncomplete="PF('dlgModificar').hide();" />
+
+						<p:commandButton value="Cancelar"
+							onclick="PF('dlgModificar').hide();" immediate="true" />
+
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+
+
+			<p:dialog id="dlg2" header="Eliminar Datos" widgetVar="dlgEliminar"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formEliminar" style="font-size: 12px;">
+					<h:outputText value="Desea eliminar esta Refecenia de producto:" />
+					<p:inputText value="#{references_product.id_reference}" size="4"
+						readonly="#{facesContext.renderResponse}" style="margin-left: 12px;" />
+
+					<p:commandButton value="Si"
+						action="#{rfproductsController.deleteRefProduct(references_product)}"
+						update=":formShowProduct" oncomplete="PF('dlgEliminar').hide();" />
+					<p:commandButton value="No" onclick="PF('dlgEliminar').hide();" />
+				</h:form>
+
+			</p:dialog>
+
+		</div>
+
+		<p:dock position="bottom" halign="center">
+			<p:menuitem value="User" icon="/Views/Image/user.png" url="../Views/Principal_Users.xhtml" />
+			<p:menuitem value="Products" icon="/Views/Image/products.png" url="../Views/Products.xhtml" />
+			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
+				url="../Views/ProductType.xhtml" />
+			<p:menuitem value="Product Reference"
+				icon="/Views/Image/references.png" url="#" />
+		</p:dock>
+
+	</p:panel>
+
+</h:body>
+</html>

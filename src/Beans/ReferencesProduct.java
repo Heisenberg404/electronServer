@@ -9,7 +9,7 @@ public class ReferencesProduct implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public ReferencesProduct(Integer id_reference, String brand, float price, String description) {
+	public ReferencesProduct(int id_reference, String brand, float price, String description) {
 		super();
 		this.id_reference = id_reference;
 		this.brand = brand;
@@ -26,11 +26,11 @@ public class ReferencesProduct implements Serializable {
 				+ ", description=" + description + "]";
 	}
 
-	public Integer getId_reference() {
+	public int getId_reference() {
 		return id_reference;
 	}
 
-	public void setId_reference(Integer id_reference) {
+	public void setId_reference(int id_reference) {
 		this.id_reference = id_reference;
 	}
 
@@ -58,7 +58,7 @@ public class ReferencesProduct implements Serializable {
 		this.description = description;
 	}
 
-	private Integer id_reference;
+	private int id_reference;
 
 	private String brand;
 

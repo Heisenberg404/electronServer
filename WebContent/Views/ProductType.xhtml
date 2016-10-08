@@ -1,0 +1,143 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<p:panel header="Principal Menu" style="height:100%;width:100%">
+
+		<div class="row" align="center">
+
+			<p:growl id="mensajeGeneral" autoUpdate="true" sticky="false"
+				showDetail="true" life="3000" />
+
+			<h:form>
+				<p:commandButton value="New Product Type"
+					oncomplete="PF('dlgNuevo').show();" update=":formInsertar"
+					style="font-size: 14px;" />
+			</h:form>
+
+			<p:dialog id="dlgN" header="New Reference Product" widgetVar="dlgNuevo"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formInsertar">
+					<p:panelGrid id="gridInsertar" columns="2"
+						style="margin: 0 auto; font-size: 12px;">
+
+						<p:outputLabel value="Type Name" />
+						<p:inputText value="#{product_type.type_name}" required="true"
+							requiredMessage="Brand is required" />
+					
+						<p:commandButton value="Save"
+							action="#{pt_controller.saveProductType(product_type)}"
+							oncomplete="PF('dlgNuevo').hide();"
+							update=":formShowProduct:TableShowRefProduct">
+						</p:commandButton>
+
+						<p:commandButton value="Cancel"
+							actionListener="#{empleadoBean.cancelar()}"
+							update=":formInsertar" immediate="true"
+							onclick="PF('dlgNuevo').hide();" />
+
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+
+			<p:separator />
+
+			<h:form id="formShowProduct">
+				<p:dataTable id="TableShowRefProduct" var="emp"
+					value="#{pt_controller.lstProductType}"
+					emptyMessage="No hay datos de empleados" style="font-size: 12px;"
+					paginator="true" paginatorPosition="bottom" rows="10">
+
+					<p:column headerText="Product Type id" visible="false">
+						<h:outputText value="#{emp.id_product_type}" />
+					</p:column>
+
+					<p:column headerText="Type Name">
+						<h:outputText value="#{emp.type_name}" />
+					</p:column>
+					
+					<p:column headerText="">
+						<p:commandButton value="Update"
+							oncomplete="PF('dlgModificar').show();" update=":formModificar">
+							<f:setPropertyActionListener target="#{product_type}" value="#{emp}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandButton value="Delete"
+							oncomplete="PF('dlgEliminar').show();" update=":formEliminar">
+							<f:setPropertyActionListener target="#{product_type}" value="#{emp}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+
+
+			<p:dialog id="dlg" header="Modificar Datos" widgetVar="dlgModificar"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formModificar">
+					<p:panelGrid columns="2" style="margin: 0 auto; font-size: 12px;">
+
+						<p:outputLabel value="Product Type ID" />
+						<p:inputText value="#{product_type.id_product_type}"
+							readonly="#{facesContext.renderResponse}" />
+
+						<p:outputLabel value="Type Name" />
+						<p:inputText value="#{product_type.type_name}" required="true"
+							requiredMessage="Brand is required" />
+						
+						<p:commandButton value="Guardar Cambios"
+							action="#{pt_controller.updateProductType(product_type)}"
+							update=":formShowProduct:TableShowRefProduct"
+							oncomplete="PF('dlgModificar').hide();" />
+
+						<p:commandButton value="Cancelar"
+							onclick="PF('dlgModificar').hide();" immediate="true" />
+
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+
+
+			<p:dialog id="dlg2" header="Eliminar Datos" widgetVar="dlgEliminar"
+				showEffect="explode" hideEffect="explode" modal="true">
+
+				<h:form id="formEliminar" style="font-size: 12px;">
+					<h:outputText value="Desea eliminar este tipo producto:" />
+					<p:inputText value="#{product_type.id_product_type}" size="4"
+						readonly="#{facesContext.renderResponse}" style="margin-left: 12px;" />
+
+					<p:commandButton value="Si"
+						action="#{pt_controller.deleteProductType(product_type)}"
+						update=":formShowProduct" oncomplete="PF('dlgEliminar').hide();" />
+					<p:commandButton value="No" onclick="PF('dlgEliminar').hide();" />
+				</h:form>
+
+			</p:dialog>
+
+		</div>
+
+		<p:dock position="bottom" halign="center">
+			<p:menuitem value="User" icon="/Views/Image/user.png" url="../Views/Principal_Users.xhtml" />
+			<p:menuitem value="Products" icon="/Views/Image/products.png" url="../Views/Products.xhtml" />
+			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
+				url="#" />
+			<p:menuitem value="Product Reference"
+				icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml" />
+		</p:dock>
+
+	</p:panel>
+
+</h:body>
+</html>

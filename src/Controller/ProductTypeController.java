@@ -31,6 +31,7 @@ public class ProductTypeController implements Serializable {
 		this.lstProductType = lstProductType;
 	}
 
+	//Obtiene la lista de tipo producto
 	public void getlistProductType() throws Exception {
 
 		lstProductType = pt.ReadProductType();
@@ -46,5 +47,37 @@ public class ProductTypeController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void saveProductType(ProductType prtype)
+	{
+		try {
+			pt.saveProducType(prtype);
+			lstProductType = pt.ReadProductType();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteProductType (ProductType prtype)
+	{
+		try {
+			pt.deleteProductType(prtype);
+			lstProductType = pt.ReadProductType();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateProductType (ProductType prtype)
+	{
+		try {
+			pt.updateProductType(prtype);
+			lstProductType = pt.ReadProductType();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
