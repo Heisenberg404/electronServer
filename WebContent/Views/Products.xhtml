@@ -40,7 +40,7 @@
 							<f:selectItem itemLabel="-- Select --" itemValue="" />
 							<f:selectItems
 								value="#{rfproductsController.lstReferenceProduct}" var="ref"
-								itemValue="#{ref.id_reference}" itemLabel="#{ref.id_reference}" />
+								itemValue="#{ref.id_reference}" itemLabel="#{ref.brand}" />
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Product Type" />
@@ -89,7 +89,7 @@
 					<p:column headerText="Product id" visible="false">
 						<h:outputText value="#{emp.id_product}" />
 					</p:column>
-					
+
 					<p:column headerText="Product Name">
 						<h:outputText value="#{emp.product_name}" />
 					</p:column>
@@ -120,8 +120,7 @@
 					<p:column headerText="">
 						<p:commandButton value="Delete"
 							oncomplete="PF('dlgEliminar').show();" update=":formEliminar">
-							<f:setPropertyActionListener target="#{empleadoBean.empleado}"
-								value="#{emp}" />
+							<f:setPropertyActionListener target="#{products}" value="#{emp}" />
 						</p:commandButton>
 					</p:column>
 
@@ -137,8 +136,9 @@
 					<p:panelGrid columns="2" style="margin: 0 auto; font-size: 12px;">
 
 						<p:outputLabel value="Product ID" />
-						<p:inputText value="#{products.id_product}" readonly="#{facesContext.renderResponse}" />
-						
+						<p:inputText value="#{products.id_product}"
+							readonly="#{facesContext.renderResponse}" />
+
 						<p:outputLabel value="Product Name" />
 						<p:inputText value="#{products.product_name}" required="true"
 							requiredMessage="Product name is required" />
@@ -176,7 +176,7 @@
 							action="#{productsController.updateProduct(products)}"
 							update=":formShowProduct:TableShowProduct"
 							oncomplete="PF('dlgModificar').hide();" />
-						
+
 						<p:commandButton value="Cancelar"
 							onclick="PF('dlgModificar').hide();" immediate="true" />
 
@@ -189,12 +189,16 @@
 				showEffect="explode" hideEffect="explode" modal="true">
 
 				<h:form id="formEliminar" style="font-size: 12px;">
-					<h:outputText value="Desea eliminar este registro?" />
+					<h:outputText value="Desea eliminar este producto:" />
+					<p:inputText value="#{products.id_product}" size="4"
+						readonly="#{facesContext.renderResponse}" style="margin-left: 12px;" />
+
 					<p:commandButton value="Si"
-						actionListener="#{empleadoBean.eliminarEmpleado()}"
+						action="#{productsController.deleteProduct(products)}"
 						update=":formShowProduct" oncomplete="PF('dlgEliminar').hide();" />
 					<p:commandButton value="No" onclick="PF('dlgEliminar').hide();" />
 				</h:form>
+
 			</p:dialog>
 
 		</div>

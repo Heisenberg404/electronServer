@@ -17,7 +17,7 @@ public class ModelUser {
 	public void saveUser(Users ref) throws Exception {
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
-		cs = con.prepareCall("{call PKG_Users.create_users(?,?,?,?,?,?,?)}");
+		cs = con.prepareCall("{call PKG_Users.Create_USERS(?,?,?,?,?,?,?)}");
 		 // Parametros del procedimiento almacenado
 		cs.setString(1, ref.getUsername());
 		cs.setString(2, ref.getPass());

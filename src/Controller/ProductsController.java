@@ -29,10 +29,21 @@ public class ProductsController implements Serializable {
 	public void setLstProducts(List<Products> lstProducts) {
 		this.lstProducts = lstProducts;
 	}
+	
+	@PostConstruct
+	public void init() {
+		try {
+			getlistProducts();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void saveProduct(Products prod) {
 		try {
 			mdproducts.saveProducts(prod);
+			lstProducts = mdproducts.ReadProduct();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,19 +60,22 @@ public class ProductsController implements Serializable {
 	{
 		try {
 			mdproducts.updateProducts(prod);
+			lstProducts = mdproducts.ReadProduct();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	@PostConstruct
-	public void init() {
+	public void deleteProduct (Products prod){
 		try {
-			getlistProducts();
+			mdproducts.deleteProducts(prod);
+			lstProducts = mdproducts.ReadProduct();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	
 }

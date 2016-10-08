@@ -16,9 +16,9 @@ public class ControllerUser implements Serializable{
 	private static final long serialVersionUID = 1L;
 	ModelUser modelUser = new ModelUser();
 	
-	public void saveUser(Users Users){
+	public void saveUser(Users users){
 		try {
-			modelUser.saveUser(Users);
+			modelUser.saveUser(users);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

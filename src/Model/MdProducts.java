@@ -85,4 +85,18 @@ public class MdProducts {
         String back = cs.getString(7);
         System.out.println(back);
 	}
+	
+	public void deleteProducts(Products prod) throws Exception {
+		Connection con = conn.getConnection();
+		CallableStatement cs = null;
+		cs = con.prepareCall("{call PKG_PRODUCTS.Delete_PRODUCTS(?,?)}");
+		 // Parametros del procedimiento almacenado	
+		cs.setInt(1, prod.getId_product());		
+		// Definimos los tipos de los parametros de salida del procedimiento almacenado
+        cs.registerOutParameter(2, java.sql.Types.VARCHAR);
+		cs.execute();
+		// Se obtienen la salida del procedimineto almacenado
+        String back = cs.getString(2);
+        System.out.println(back);
+	}
 }
