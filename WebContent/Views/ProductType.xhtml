@@ -22,8 +22,9 @@
 					style="font-size: 14px;" />
 			</h:form>
 
-			<p:dialog id="dlgN" header="New Reference Product" widgetVar="dlgNuevo"
-				showEffect="explode" hideEffect="explode" modal="true">
+			<p:dialog id="dlgN" header="New Reference Product"
+				widgetVar="dlgNuevo" showEffect="explode" hideEffect="explode"
+				modal="true">
 
 				<h:form id="formInsertar">
 					<p:panelGrid id="gridInsertar" columns="2"
@@ -31,8 +32,10 @@
 
 						<p:outputLabel value="Type Name" />
 						<p:inputText value="#{product_type.type_name}" required="true"
-							requiredMessage="Brand is required" />
-					
+							requiredMessage="Brand is required" id="txtTypeName"
+							label="Type name is required" />
+						<h:messages for="txtTypeName" />
+
 						<p:commandButton value="Save"
 							action="#{pt_controller.saveProductType(product_type)}"
 							oncomplete="PF('dlgNuevo').hide();"
@@ -40,7 +43,7 @@
 						</p:commandButton>
 
 						<p:commandButton value="Cancel"
-							actionListener="#{empleadoBean.cancelar()}"
+							actionListener="#{pt_controller.cancelar()}"
 							update=":formInsertar" immediate="true"
 							onclick="PF('dlgNuevo').hide();" />
 
@@ -63,18 +66,20 @@
 					<p:column headerText="Type Name">
 						<h:outputText value="#{emp.type_name}" />
 					</p:column>
-					
+
 					<p:column headerText="">
 						<p:commandButton value="Update"
 							oncomplete="PF('dlgModificar').show();" update=":formModificar">
-							<f:setPropertyActionListener target="#{product_type}" value="#{emp}" />
+							<f:setPropertyActionListener target="#{product_type}"
+								value="#{emp}" />
 						</p:commandButton>
 					</p:column>
 
 					<p:column headerText="">
 						<p:commandButton value="Delete"
 							oncomplete="PF('dlgEliminar').show();" update=":formEliminar">
-							<f:setPropertyActionListener target="#{product_type}" value="#{emp}" />
+							<f:setPropertyActionListener target="#{product_type}"
+								value="#{emp}" />
 						</p:commandButton>
 					</p:column>
 
@@ -95,8 +100,10 @@
 
 						<p:outputLabel value="Type Name" />
 						<p:inputText value="#{product_type.type_name}" required="true"
-							requiredMessage="Brand is required" />
-						
+							requiredMessage="Brand is required" id="txtTypeName"
+							label="Type name is required" />
+						<h:messages for="txtTypeName" />
+
 						<p:commandButton value="Guardar Cambios"
 							action="#{pt_controller.updateProductType(product_type)}"
 							update=":formShowProduct:TableShowRefProduct"
@@ -116,7 +123,8 @@
 				<h:form id="formEliminar" style="font-size: 12px;">
 					<h:outputText value="Desea eliminar este tipo producto:" />
 					<p:inputText value="#{product_type.id_product_type}" size="4"
-						readonly="#{facesContext.renderResponse}" style="margin-left: 12px;" />
+						readonly="#{facesContext.renderResponse}"
+						style="margin-left: 12px;" />
 
 					<p:commandButton value="Si"
 						action="#{pt_controller.deleteProductType(product_type)}"
@@ -129,8 +137,10 @@
 		</div>
 
 		<p:dock position="bottom" halign="center">
-			<p:menuitem value="User" icon="/Views/Image/user.png" url="../Views/Principal_Users.xhtml" />
-			<p:menuitem value="Products" icon="/Views/Image/products.png" url="../Views/Products.xhtml" />
+			<p:menuitem value="User" icon="/Views/Image/user.png"
+				url="../Views/Principal_Users.xhtml" />
+			<p:menuitem value="Products" icon="/Views/Image/products.png"
+				url="../Views/Products.xhtml" />
 			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
 				url="#" />
 			<p:menuitem value="Product Reference"

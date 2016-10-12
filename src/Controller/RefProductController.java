@@ -87,4 +87,13 @@ public class RefProductController implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void cancelar(){
+		try {
+			rfp.cancelar();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

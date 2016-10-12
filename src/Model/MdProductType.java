@@ -17,18 +17,20 @@ public class MdProductType implements Serializable {
 
 	Conection conn = new Conection();
 
+	ProductType produd;
+
 	public List<ProductType> ReadProductType() throws Exception {
-		
+
 		List<ProductType> lstProductType = new ArrayList<ProductType>();
-		
+
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
 		ResultSet rs = null;
-		
+
 		cs = con.prepareCall("{call PKG_PRODUCTS_TYPE.Read_PRODUCTS_TYPE(?)}");
 		cs.registerOutParameter(1, OracleTypes.CURSOR);
 		cs.execute();
-		
+
 		rs = (ResultSet) cs.getObject(1);
 
 		while (rs.next()) {
@@ -43,12 +45,12 @@ public class MdProductType implements Serializable {
 		return lstProductType;
 
 	}
-	
+
 	public void saveProducType(ProductType pt) throws Exception {
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
 		cs = con.prepareCall("{call PKG_PRODUCTS_TYPE.Create_PRODUCTS_TYPE(?,?)}");
-		// Parametros del procedimiento almacenado		
+		// Parametros del procedimiento almacenado
 		cs.setString(1, pt.getType_name());
 		// Definimos los tipos de los parametros de salida del procedimiento
 		// almacenado
@@ -58,12 +60,12 @@ public class MdProductType implements Serializable {
 		String back = cs.getString(2);
 		System.out.println(back);
 	}
-	
-	public void updateProductType(ProductType pt)throws Exception{
+
+	public void updateProductType(ProductType pt) throws Exception {
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
 		cs = con.prepareCall("{call PKG_PRODUCTS_TYPE.Update_PRODUCTS_TYPE(?,?,?)}");
-		// Parametros del procedimiento almacenado		
+		// Parametros del procedimiento almacenado
 		cs.setInt(1, pt.getId_product_type());
 		cs.setString(2, pt.getType_name());
 		// Definimos los tipos de los parametros de salida del procedimiento
@@ -74,12 +76,12 @@ public class MdProductType implements Serializable {
 		String back = cs.getString(3);
 		System.out.println(back);
 	}
-	
-	public void deleteProductType(ProductType pt)throws Exception{
+
+	public void deleteProductType(ProductType pt) throws Exception {
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
 		cs = con.prepareCall("{call PKG_PRODUCTS_TYPE.Delete_PRODUCTS_TYPE(?,?)}");
-		// Parametros del procedimiento almacenado		
+		// Parametros del procedimiento almacenado
 		cs.setInt(1, pt.getId_product_type());
 		// Definimos los tipos de los parametros de salida del procedimiento
 		// almacenado
@@ -88,5 +90,9 @@ public class MdProductType implements Serializable {
 		// Se obtienen la salida del procedimineto almacenado
 		String back = cs.getString(2);
 		System.out.println(back);
+	}
+
+	public void cancelar() throws Exception {
+		produd = new ProductType();
 	}
 }

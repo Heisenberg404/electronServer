@@ -16,6 +16,8 @@ public class MdProducts {
 
 	Conection conn = new Conection();
 	
+	Products prod;
+	
 	public MdProducts()
 	{
 		super();
@@ -98,5 +100,10 @@ public class MdProducts {
 		// Se obtienen la salida del procedimineto almacenado
         String back = cs.getString(2);
         System.out.println(back);
+	}
+	
+	public void cancelar()throws Exception
+	{
+		prod = new Products();
 	}
 }

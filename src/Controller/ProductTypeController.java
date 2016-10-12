@@ -80,4 +80,16 @@ public class ProductTypeController implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void cancelar (){
+		try {
+			pt.cancelar();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
+

@@ -77,5 +77,15 @@ public class ProductsController implements Serializable {
 		}
 	}
 	
+	public void cancelar(){
+	
+		try {
+			mdproducts.cancelar();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 }

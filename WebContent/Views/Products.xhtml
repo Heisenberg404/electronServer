@@ -27,12 +27,14 @@
 				showEffect="explode" hideEffect="explode" modal="true">
 
 				<h:form id="formInsertar">
-					<p:panelGrid id="gridInsertar" columns="2"
+					<p:panelGrid id="gridInsertar" columns="1"
 						style="margin: 0 auto; font-size: 12px;">
 
 						<p:outputLabel value="Product Name" />
 						<p:inputText value="#{products.product_name}" required="true"
-							requiredMessage="Product name is required" />
+							requiredMessage="Product name is required" 
+							id="txtProductName" label="Prodcut name is required"/>
+						<h:messages for="txtProductName"/>
 
 						<p:outputLabel value="Reference" />
 						<p:selectOneMenu id="reference" value="#{products.id_reference}"
@@ -54,7 +56,9 @@
 
 						<p:outputLabel value="Quantity" />
 						<p:inputText value="#{products.quantity}" required="true"
-							requiredMessage="Quantity name is required" />
+							requiredMessage="Quantity name is required" 
+							id="txtQuantity" label="Quantity is required"/>
+						<h:messages for="txtQuantity"/>
 
 						<p:outputLabel value="Active" />
 						<p:selectOneMenu id="active" value="#{products.active}"
@@ -71,7 +75,7 @@
 						</p:commandButton>
 
 						<p:commandButton value="Cancel"
-							actionListener="#{empleadoBean.cancelar()}"
+							actionListener="#{productsController.cancelar()}"
 							update=":formInsertar" immediate="true"
 							onclick="PF('dlgNuevo').hide();" />
 

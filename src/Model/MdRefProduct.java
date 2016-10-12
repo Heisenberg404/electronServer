@@ -17,6 +17,8 @@ public class MdRefProduct implements Serializable {
 
 	Conection conn = new Conection();
 
+	ReferencesProduct ref;
+	
 	public List<ReferencesProduct> ReadReference() throws Exception {
 		List<ReferencesProduct> lstReferenceProduct = new ArrayList<ReferencesProduct>();
 		Connection con = conn.getConnection();
@@ -90,5 +92,9 @@ public class MdRefProduct implements Serializable {
 		// Se obtienen la salida del procedimineto almacenado
 		String back = cs.getString(2);
 		System.out.println(back);
+	}
+	
+	public void cancelar () throws Exception {
+		ref = new ReferencesProduct();
 	}
 }
