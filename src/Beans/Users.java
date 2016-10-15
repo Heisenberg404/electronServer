@@ -4,8 +4,20 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 
-@ManagedBean(name = "usersServer")
+@ManagedBean(name = "userServer")
 public class Users implements Serializable {
+	
+	private String username;
+
+	private String pass;
+
+	private String complete_name;
+
+	private String last_name;
+
+	private String email;
+
+	private int number;
 
 	private static final long serialVersionUID = 1L;
 
@@ -89,16 +101,6 @@ public class Users implements Serializable {
 		this.number = number;
 	}
 
-	private String username;
-
-	private String pass;
-
-	private String complete_name;
-
-	private String last_name;
-
-	private String email;
-
-	private int number;
+	
 
 }

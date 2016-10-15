@@ -17,7 +17,7 @@
 
 			<h:form>
 				<p:commandButton value="Create user"
-					action="#{ControllerUser.saveUser(userServer)}"
+					
 					oncomplete="PF('dlgNuevo').show();" update=":formCreate"
 					style="font-size: 14px;" />
 			</h:form>
@@ -72,52 +72,52 @@
 			<p:separator />
 
 			<h:form id="formShowUsers">
-				<p:dataTable id="tableShowUsers" var="emp"
-					value="#{empleadoBean.listar}"
+				<p:dataTable id="tableShowUsers" var="VUSERS"
+					value="#{ControllerUser.lstUser}"
 					emptyMessage="No hay datos de empleados" style="font-size: 12px;">
 
 					<p:column headerText="Identification code">
-						<h:outputText value="#{USERS.ID_USER}" />
+						<h:outputText value="#{VUSERS.id_users}" />
 					</p:column>
 
 					<p:column headerText="Username">
-						<h:outputText value="#{USERS.USERNAME}" />
+						<h:outputText value="#{VUSERS.username}" />
 					</p:column>
 
 					<p:column headerText="Password">
-						<h:outputText value="#{USERS.PASS}" />
+						<h:outputText value="#{VUSERS.pass}" />
 					</p:column>
 
 					<p:column headerText="Complete name">
-						<h:outputText value="#{USERS.COMPLETE_NAME}" />
+						<h:outputText value="#{VUSERS.complete_name}" />
 					</p:column>
 
 					<p:column headerText="Last name">
-						<h:outputText value="#{USERS.LAST_NAME}" />
+						<h:outputText value="#{VUSERS.last_name}" />
 					</p:column>
 					
 					
 					<p:column headerText="Email">
-						<h:outputText value="#{USERS.EMAIL}" />
+						<h:outputText value="#{VUSERS.email}" />
 					</p:column>
 					
 					<p:column headerText="Telephone">
-						<h:outputText value="#{USERS.TELEPHONE}" />
+						<h:outputText value="#{VUSERS.number}" />
 					</p:column>
 
 					<p:column headerText="">
 						<p:commandButton value="Update"
 							oncomplete="PF('dlgModificar').show();" update=":formUpdate">
-							<f:setPropertyActionListener target="#{empleadoBean.empleado}"
-								value="#{emp}" />
+							<f:setPropertyActionListener target="#{userServer}"
+								value="#{VUSERS}" />
 						</p:commandButton>
 					</p:column>
 
 					<p:column headerText="">
 						<p:commandButton value="Eliminar"
 							oncomplete="PF('dlgEliminar').show();" update=":formEliminar">
-							<f:setPropertyActionListener target="#{empleadoBean.empleado}"
-								value="#{emp}" />
+							<f:setPropertyActionListener target="#{userServer}"
+								value="#{VUSERS}" />
 						</p:commandButton>
 					</p:column>
 
@@ -132,36 +132,39 @@
 				<h:form id="formUpdate">
 					<p:panelGrid columns="2" style="margin: 0 auto; font-size: 12px;">
 
+						<p:outputLabel value="User id:" />
+						<p:inputText value="#{userServer.id_users}" 
+							readonly="#{facesContext.renderResponse}" />
+					
 						<p:outputLabel value="Username:" />
-						<p:inputText value="#{empleadoBean.empleado.nombres}"
+						<p:inputText value="#{userServer.username}"
 							required="true" requiredMessage="Nombres es oblligatorio" />
 
 						<p:outputLabel value="Password" />
-						<p:password id="nonFeedback"
-							value="#{empleadoBean.empleado.apellidos}" required="true"
-							requiredMessage="Apellidos es oblligatorio" />
+						<p:inputText value="#{userServer.pass}" required="true"
+							requiredMessage="Password es oblligatorio" />
 
 
 						<p:outputLabel value="Complete name:" />
-						<p:inputText value="#{empleadoBean.empleado.direccion}"
+						<p:inputText value="#{userServer.complete_name}"
 							required="true" requiredMessage="Direccion es oblligatorio" />
 
 
 
 						<p:outputLabel value="Last name:" />
-						<p:inputText value="#{empleadoBean.empleado.codigoArea}" />
+						<p:inputText value="#{userServer.last_name}" />
 
 
 						<p:outputLabel value="Email:" />
-						<p:inputText value="#{empleadoBean.empleado.codigoArea}" />
+						<p:inputText value="#{userServer.email}" />
 
 
 						<p:outputLabel value="Telefono:" />
-						<p:inputText value="#{empleadoBean.empleado.telefono}" />
+						<p:inputText value="#{userServer.number}" />
 
 
 						<p:commandButton value="Save"
-							actionListener="#{empleadoBean.modificarEmpleado()}"
+							actionListener="#{ControllerUser.updateUsers(userServer)}"
 							update=":formShowUsers:tableShowUsers"
 							oncomplete="PF('dlgModificar').hide();" />
 						<p:commandButton value="Cancel"
@@ -176,9 +179,12 @@
 				showEffect="explode" hideEffect="explode" modal="true">
 
 				<h:form id="formEliminar" style="font-size: 12px;">
-					<h:outputText value="Desea eliminar este registro?" />
+					<h:outputText value="Desea eliminar este producto:" />
+					<p:inputText value="#{userServer.id_users}" size="4"
+					readonly="#{facesContext.renderResponse}" style="margin-left: 12px;" />
+					
 					<p:commandButton value="Si"
-						actionListener="#{empleadoBean.eliminarEmpleado()}"
+						action="#{ControllerUser.deleteUser(userServer)}"
 						update=":formShowUsers" oncomplete="PF('dlgEliminar').hide();" />
 					<p:commandButton value="No" onclick="PF('dlgEliminar').hide();" />
 				</h:form>
