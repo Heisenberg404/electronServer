@@ -4,9 +4,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Products</title>
-    <f:event listener="#{ControllerUser.checkSession()}"
-        type="preRenderView"></f:event>
+	<title>Products</title>
+	<f:event listener="#{ControllerUser.checkSession()}"
+		type="preRenderView"></f:event>
 
 </h:head>
 
@@ -30,15 +30,15 @@
 				showEffect="explode" hideEffect="explode" modal="true">
 
 				<h:form id="formInsertar">
-					<p:panelGrid id="gridInsertar" columns="1"
+					<p:panelGrid id="gridInsertar" columns="2"
 						style="margin: 0 auto; font-size: 12px;">
 
 						<p:outputLabel value="Product Name" />
 						<p:inputText value="#{products.product_name}" required="true"
-							requiredMessage="Product name is required" 
-							id="txtProductName" label="Prodcut name is required"/>
-						<h:messages for="txtProductName"/>
-
+							requiredMessage="Product name is required" id="txtProductName"
+							label="Prodcut name is required" />
+						<h:messages for="txtProductName" />
+						<h:column />
 						<p:outputLabel value="Reference" />
 						<p:selectOneMenu id="reference" value="#{products.id_reference}"
 							required="true" requiredMessage="Select a Reference">
@@ -59,10 +59,10 @@
 
 						<p:outputLabel value="Quantity" />
 						<p:inputText value="#{products.quantity}" required="true"
-							requiredMessage="Quantity name is required" 
-							id="txtQuantity" label="Quantity is required"/>
-						<h:messages for="txtQuantity"/>
-
+							requiredMessage="Quantity name is required" id="txtQuantity"
+							label="Quantity is required" />
+						<h:messages for="txtQuantity" />
+						<h:column />
 						<p:outputLabel value="Active" />
 						<p:selectOneMenu id="active" value="#{products.active}"
 							required="true" requiredMessage="Select a check">
@@ -199,7 +199,8 @@
 				<h:form id="formEliminar" style="font-size: 12px;">
 					<h:outputText value="Desea eliminar este producto:" />
 					<p:inputText value="#{products.id_product}" size="4"
-						readonly="#{facesContext.renderResponse}" style="margin-left: 12px;" />
+						readonly="#{facesContext.renderResponse}"
+						style="margin-left: 12px;" />
 
 					<p:commandButton value="Si"
 						action="#{productsController.deleteProduct(products)}"
@@ -212,7 +213,8 @@
 		</div>
 
 		<p:dock position="bottom" halign="center">
-			<p:menuitem value="User" icon="/Views/Image/user.png" url="../Views/Principal_Users.xhtml" />
+			<p:menuitem value="User" icon="/Views/Image/user.png"
+				url="../Views/Principal_Users.xhtml" />
 			<p:menuitem value="Products" icon="/Views/Image/products.png" url="#" />
 			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
 				url="../Views/ProductType.xhtml" />

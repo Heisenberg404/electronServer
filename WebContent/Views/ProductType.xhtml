@@ -30,7 +30,7 @@
 				modal="true">
 
 				<h:form id="formInsertar">
-					<p:panelGrid id="gridInsertar" columns="2"
+					<p:panelGrid id="gridInsertar" columns="3"
 						style="margin: 0 auto; font-size: 12px;">
 
 						<p:outputLabel value="Type Name" />
@@ -38,7 +38,7 @@
 							requiredMessage="Brand is required" id="txtTypeName"
 							label="Type name is required" />
 						<h:messages for="txtTypeName" />
-
+						
 						<p:commandButton value="Save"
 							action="#{pt_controller.saveProductType(product_type)}"
 							oncomplete="PF('dlgNuevo').hide();"
