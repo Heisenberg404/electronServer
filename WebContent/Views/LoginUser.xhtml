@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Login User</title>
+</h:head>
+<body>
+    <h:form>
+        <p:messages autoUpdate="true" showDetail="true" />
+        <h:panelGrid columns="2">
+            <p:outputLabel for="txtUsuario" value="User" />
+            <p:inputText id="txtUsuario" value="#{userServer.username}" required="true" />
+
+            <p:outputLabel for="txtPass" value="Password" />
+            <p:password id="txtPass" value="#{userServer.pass}" required="true" />
+
+            <h:column />
+            <p:commandButton action="#{ControllerUser.iniciarSesion(userServer)}" 
+                             icon="ui-icon-key" value="Login" />
+
+        </h:panelGrid>
+
+
+    </h:form>
+
+
+</body>
+</html>

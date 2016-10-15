@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,30 @@ public class ControllerUser implements Serializable{
 			e.printStackTrace();
 		}
 	}
+	
+    public void checkSession() throws Exception {
+        modelUser.checkSession();
+    }
+
+    public void iniciarSesion(Users users) {
+        try {
+            modelUser.iniciarSesion(users);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    public void closeSession()
+    {
+        try {
+            modelUser.closeSession();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 	
 	
 }
