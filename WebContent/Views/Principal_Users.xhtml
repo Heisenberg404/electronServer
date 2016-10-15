@@ -6,6 +6,9 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<title>Principal User</title>
+    <f:event listener="#{ControllerUser.checkSession()}"
+        type="preRenderView"></f:event>
+	
 </h:head>
 <h:body>
 	<p:panel header="Principal Menu Users" style="height:100%;width:100%">
@@ -191,12 +194,10 @@
 			</p:dialog>
 		</div>
 		<p:dock position="bottom" halign="center">
-			<p:menuitem value="User" icon="/Views/Image/user.png" url="#" />
-			<p:menuitem value="Products" icon="/Views/Image/products.png" url="#" />
-			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
-				url="#" />
-			<p:menuitem value="Product Reference"
-				icon="/Views/Image/references.png" url="#" />
+			<p:menuitem value="User" icon="/Views/Image/user.png" url="../Views/Principal_Users.xhtml" />
+			<p:menuitem value="Products" icon="/Views/Image/products.png" url="../Views/Products.xhtml" />
+			<p:menuitem value="Product Type" icon="/Views/Image/productType.png" url="../Views/PrductType.xhtml"/>
+			<p:menuitem value="Product Reference" icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml" />
 		</p:dock>
 	</p:panel>
 </h:body>
