@@ -6,6 +6,9 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<title>Principal User</title>
+    <f:event listener="#{ControllerUser.checkSession()}"
+        type="preRenderView"></f:event>
+	
 </h:head>
 <h:body>
 	<p:panel header="Principal Menu Users" style="height:100%;width:100%">
