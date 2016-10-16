@@ -8,9 +8,20 @@
     <title>Login User</title>
 </h:head>
 <body>
-    <h:form>
+<p:panel header="Login" style="height:100%;width:100%">
+    <div class="row" align="center">
+		<img src="../Views/Image/electro.png" width="373px" height="272px" align="top" />
+	</div>
+    <div class="row" align="center">
+	<br>
+	
+	
+	
+	</br>	
+    <h:form >
         <p:messages autoUpdate="true" showDetail="true" />
         <h:panelGrid columns="2">
+        	
             <p:outputLabel for="txtUsuario" value="User" />
             <p:inputText id="txtUsuario" value="#{userServer.username}" required="true" />
 
@@ -25,7 +36,8 @@
 
 
     </h:form>
-
+    </div>
+</p:panel>
 
 </body>
 </html>
