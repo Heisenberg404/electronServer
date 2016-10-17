@@ -4,17 +4,27 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 
+import org.primefaces.model.UploadedFile;
+
 @ManagedBean(name = "references_product")
 public class ReferencesProduct implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private int id_reference;
+	private String brand;
+	private float price;
+	private String description;
+	private UploadedFile file;
+	
+	
 
-	public ReferencesProduct(int id_reference, String brand, float price, String description) {
+	public ReferencesProduct(int id_reference, String brand, float price, String description, UploadedFile file) {
 		super();
 		this.id_reference = id_reference;
 		this.brand = brand;
 		this.price = price;
 		this.description = description;
+		this.file = file;
 	}
 
 	public ReferencesProduct() {
@@ -57,12 +67,13 @@ public class ReferencesProduct implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public UploadedFile getFile() {
+		return file;
+	}
 
-	private int id_reference;
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
 
-	private String brand;
-
-	private float price;
-
-	private String description;
+	
 }

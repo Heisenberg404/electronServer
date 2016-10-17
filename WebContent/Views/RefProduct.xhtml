@@ -4,9 +4,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Reference Products</title>
-    <f:event listener="#{ControllerUser.checkSession()}"
-        type="preRenderView"></f:event>
+	<title>Reference Products</title>
+	<f:event listener="#{ControllerUser.checkSession()}"
+		type="preRenderView"></f:event>
 
 </h:head>
 
@@ -27,9 +27,9 @@
 
 			<p:dialog id="dlgN" header="New Reference Product"
 				widgetVar="dlgNuevo" showEffect="explode" hideEffect="explode"
-				modal="true" >
+				modal="true">
 
-				<h:form id="formInsertar">
+				<h:form id="formInsertar" enctype="multipart/form-data">
 					<p:panelGrid id="gridInsertar" columns="3"
 						style="margin: 0 auto; font-size: 12px;">
 
@@ -42,7 +42,9 @@
 						<p:inputText value="#{references_product.price}" required="true"
 							id="txtPrice" label="Price Required" />
 						<h:messages for="txtPrice" />
-
+						<p:outputLabel value="Image" />
+						<p:fileUpload value="#{references_product.file}" mode="simple"
+							allowTypes="/(\.|\/)(jpg|jpeg|png)$/" />
 						<p:outputLabel value="Description" />
 						<p:inputTextarea rows="5" cols="30" maxlength="50"
 							id="txtDescription" counterTemplate="{0} characters remaining."
@@ -53,7 +55,7 @@
 
 						<p:commandButton value="Save"
 							action="#{rfproductsController.saveRefProduct(references_product)}"
-							oncomplete="PF('dlgNuevo').hide();" 
+							oncomplete="PF('dlgNuevo').hide();"
 							update=":formShowProduct:TableShowRefProduct">
 						</p:commandButton>
 
@@ -172,11 +174,16 @@
 		</div>
 
 		<p:dock position="bottom" halign="center">
-			<p:menuitem value="User" icon="/Views/Image/user.png" url="../Views/Principal_Users.xhtml" />
-			<p:menuitem value="Products" icon="/Views/Image/products.png" url="../Views/Products.xhtml" />
-			<p:menuitem value="Principal Menu" icon="/Views/Image/menu.png" url="../Views/PrincipalMenu.xhtml" />
-			<p:menuitem value="Product Type" icon="/Views/Image/productType.png" url="../Views/ProductType.xhtml"/>
-			<p:menuitem value="Product Reference" icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml" />
+			<p:menuitem value="User" icon="/Views/Image/user.png"
+				url="../Views/Principal_Users.xhtml" />
+			<p:menuitem value="Products" icon="/Views/Image/products.png"
+				url="../Views/Products.xhtml" />
+			<p:menuitem value="Principal Menu" icon="/Views/Image/menu.png"
+				url="../Views/PrincipalMenu.xhtml" />
+			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
+				url="../Views/ProductType.xhtml" />
+			<p:menuitem value="Product Reference"
+				icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml" />
 		</p:dock>
 
 	</p:panel>

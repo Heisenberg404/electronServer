@@ -47,17 +47,18 @@ public class MdRefProduct implements Serializable {
 	public void saveRefProduct(ReferencesProduct rp) throws Exception {
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
-		cs = con.prepareCall("{call PKG_REFERENCES_PRODUCT.Create_REFERENCES_PRODUCT(?,?,?,?)}");
+		cs = con.prepareCall("{call PKG_REFERENCES_PRODUCT.Create_REFERENCES_PRODUCT(?,?,?,?,?)}");
 		// Parametros del procedimiento almacenado
 		cs.setString(1, rp.getBrand());
 		cs.setFloat(2, rp.getPrice());
 		cs.setString(3, rp.getDescription());
+		cs.setBinaryStream(4, rp.getFile().getInputstream());
 		// Definimos los tipos de los parametros de salida del procedimiento
 		// almacenado
-		cs.registerOutParameter(4, java.sql.Types.VARCHAR);
+		cs.registerOutParameter(5, java.sql.Types.VARCHAR);
 		cs.execute();
 		// Se obtienen la salida del procedimineto almacenado
-		String back = cs.getString(4);
+		String back = cs.getString(5);
 		System.out.println(back);
 	}
 
