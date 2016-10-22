@@ -42,9 +42,11 @@
 						<p:inputText value="#{references_product.price}" required="true"
 							id="txtPrice" label="Price Required" />
 						<h:messages for="txtPrice" />
+
 						<p:outputLabel value="Image" />
 						<p:fileUpload value="#{references_product.file}" mode="simple"
 							allowTypes="/(\.|\/)(jpg|jpeg|png)$/" />
+						<h:column></h:column>
 						<p:outputLabel value="Description" />
 						<p:inputTextarea rows="5" cols="30" maxlength="50"
 							id="txtDescription" counterTemplate="{0} characters remaining."
@@ -116,23 +118,28 @@
 			<p:dialog id="dlg" header="Modificar Datos" widgetVar="dlgModificar"
 				showEffect="explode" hideEffect="explode" modal="true">
 
-				<h:form id="formModificar">
-					<p:panelGrid columns="2" style="margin: 0 auto; font-size: 12px;">
+				<h:form id="formModificar" enctype="multipart/form-data">
+					<p:panelGrid columns="3" style="margin: 0 auto; font-size: 12px;">
 
 						<p:outputLabel value="Reference Product ID" />
 						<p:inputText value="#{references_product.id_reference}"
 							readonly="#{facesContext.renderResponse}" />
-
+						<h:column></h:column>
 						<p:outputLabel value="Brand" />
 						<p:inputText value="#{references_product.brand}" required="true"
 							id="txtBrand" label="Brand required" />
 						<h:messages for="txtBrand" />
+
 
 						<p:outputLabel value="Price" />
 						<p:inputText value="#{references_product.price}" required="true"
 							id="txtPrice" label="Price Required" />
 						<h:messages for="txtPrice" />
 
+						<p:outputLabel value="Image" />
+						<p:fileUpload value="#{references_product.file}" mode="simple"
+							allowTypes="/(\.|\/)(jpg|jpeg|png)$/" />
+						<h:column></h:column>
 						<p:outputLabel value="Description" />
 						<p:inputTextarea rows="5" cols="30" maxlength="50"
 							id="txtDescription" counterTemplate="{0} characters remaining."
@@ -144,7 +151,7 @@
 						<p:commandButton value="Guardar Cambios"
 							action="#{rfproductsController.updateRefProduct(references_product)}"
 							update=":formShowProduct:TableShowRefProduct"
-							oncomplete="PF('dlgModificar').hide();" />
+							oncomplete="PF('dlgModificar').hide();" ajax="false" />
 
 						<p:commandButton value="Cancelar"
 							onclick="PF('dlgModificar').hide();" immediate="true" />

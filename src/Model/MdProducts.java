@@ -6,42 +6,41 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import Beans.Products;
 import Utils.Conection;
 import oracle.jdbc.OracleTypes;
 
-
 public class MdProducts {
 
 	Conection conn = new Conection();
-	
+
 	Products prod;
-	
-	public MdProducts()
-	{
+
+	public MdProducts() {
 		super();
-	}	
-	
+	}
+
 	public void saveProducts(Products prod) throws Exception {
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
 		cs = con.prepareCall("{call PKG_PRODUCTS.Create_PRODUCTS(?,?,?,?,?,?)}");
-		 // Parametros del procedimiento almacenado
+		// Parametros del procedimiento almacenado
 		cs.setString(1, prod.getProduct_name());
 		cs.setInt(2, prod.getId_reference());
 		cs.setInt(3, prod.getId_product_type());
 		cs.setInt(4, prod.getQuantity());
 		cs.setInt(5, prod.getActive());
-		// Definimos los tipos de los parametros de salida del procedimiento almacenado
-        cs.registerOutParameter(6, java.sql.Types.VARCHAR);
+		// Definimos los tipos de los parametros de salida del procedimiento
+		// almacenado
+		cs.registerOutParameter(6, java.sql.Types.VARCHAR);
 		cs.execute();
 		// Se obtienen la salida del procedimineto almacenado
-        String back = cs.getString(6);
-        System.out.println(back);
+		String back = cs.getString(6);
+		System.out.println(back);
+		con.close();
 	}
-	
-	public List<Products> ReadProduct()throws Exception{
+
+	public List<Products> ReadProduct() throws Exception {
 		List<Products> lstProducts = new ArrayList<Products>();
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
@@ -50,60 +49,62 @@ public class MdProducts {
 		cs.registerOutParameter(1, OracleTypes.CURSOR);
 		cs.execute();
 		rs = (ResultSet) cs.getObject(1);
-		
-		while (rs.next()) 
-		{
+
+		while (rs.next()) {
 			Products pr = new Products();
-			
+
 			pr.setId_product(rs.getInt("ID_PRODUCT"));
 			pr.setProduct_name(rs.getString("PRODUCT_NAME"));
 			pr.setId_reference(rs.getInt("ID_REFERENCE"));
 			pr.setId_product_type(rs.getInt("ID_PRODUCT_TYPE"));
 			pr.setQuantity(rs.getInt("QUANTITY"));
 			pr.setActive(rs.getInt("ACTIVE"));
-			
+
 			lstProducts.add(pr);
 		}
-		
+		con.close();
 		return lstProducts;
-		
-	}	
-	
+
+	}
+
 	public void updateProducts(Products prod) throws Exception {
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
 		cs = con.prepareCall("{call PKG_PRODUCTS.Update_PRODUCTS(?,?,?,?,?,?,?)}");
-		 // Parametros del procedimiento almacenado	
+		// Parametros del procedimiento almacenado
 		cs.setInt(1, prod.getId_product());
 		cs.setString(2, prod.getProduct_name());
 		cs.setInt(3, prod.getId_reference());
 		cs.setInt(4, prod.getId_product_type());
 		cs.setInt(5, prod.getQuantity());
-		cs.setInt(6, prod.getActive());		
-		// Definimos los tipos de los parametros de salida del procedimiento almacenado
-        cs.registerOutParameter(7, java.sql.Types.VARCHAR);
+		cs.setInt(6, prod.getActive());
+		// Definimos los tipos de los parametros de salida del procedimiento
+		// almacenado
+		cs.registerOutParameter(7, java.sql.Types.VARCHAR);
 		cs.execute();
 		// Se obtienen la salida del procedimineto almacenado
-        String back = cs.getString(7);
-        System.out.println(back);
+		String back = cs.getString(7);
+		System.out.println(back);
+		con.close();
 	}
-	
+
 	public void deleteProducts(Products prod) throws Exception {
 		Connection con = conn.getConnection();
 		CallableStatement cs = null;
 		cs = con.prepareCall("{call PKG_PRODUCTS.Delete_PRODUCTS(?,?)}");
-		 // Parametros del procedimiento almacenado	
-		cs.setInt(1, prod.getId_product());		
-		// Definimos los tipos de los parametros de salida del procedimiento almacenado
-        cs.registerOutParameter(2, java.sql.Types.VARCHAR);
+		// Parametros del procedimiento almacenado
+		cs.setInt(1, prod.getId_product());
+		// Definimos los tipos de los parametros de salida del procedimiento
+		// almacenado
+		cs.registerOutParameter(2, java.sql.Types.VARCHAR);
 		cs.execute();
 		// Se obtienen la salida del procedimineto almacenado
-        String back = cs.getString(2);
-        System.out.println(back);
+		String back = cs.getString(2);
+		System.out.println(back);
+		con.close();
 	}
-	
-	public void cancelar()throws Exception
-	{
+
+	public void cancelar() throws Exception {
 		prod = new Products();
 	}
 }

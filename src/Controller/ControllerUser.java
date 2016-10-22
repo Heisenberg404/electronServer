@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
-import Beans.Products;
 import Beans.Users;
 import Model.ModelUser;
 
@@ -20,6 +19,7 @@ import Model.ModelUser;
 public class ControllerUser implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
 	ModelUser modelUser = new ModelUser();
 	
 	List<Users> lstUser = new ArrayList<Users>();
@@ -99,7 +99,9 @@ public class ControllerUser implements Serializable{
             e.printStackTrace();
         }
     }
-
-	
+    
+    public void cancelar()throws Exception{
+    	modelUser.cancelar();
+    }	
 	
 }

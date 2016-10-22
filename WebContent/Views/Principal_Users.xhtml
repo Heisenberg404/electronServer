@@ -6,9 +6,9 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<title>Principal User</title>
-    <f:event listener="#{ControllerUser.checkSession()}"
-        type="preRenderView"></f:event>
-	
+	<f:event listener="#{ControllerUser.checkSession()}"
+		type="preRenderView"></f:event>
+
 </h:head>
 <h:body>
 	<p:panel header="Principal Menu Users" style="height:100%;width:100%">
@@ -20,7 +20,6 @@
 
 			<h:form>
 				<p:commandButton value="Create user"
-					
 					oncomplete="PF('dlgNuevo').show();" update=":formCreate"
 					style="font-size: 14px;" />
 			</h:form>
@@ -33,18 +32,17 @@
 						style="margin: 0 auto; font-size: 12px;">
 
 						<p:outputLabel value="Username:" />
-						<p:inputText value="#{userServer.username}"
-							required="true" requiredMessage="Nombres es oblligatorio" />
+						<p:inputText value="#{userServer.username}" required="true"
+							requiredMessage="Nombres es oblligatorio" />
 
 						<p:outputLabel value="Password" />
-						<p:password id="nonFeedback"
-							value="#{userServer.pass}" required="true"
-							requiredMessage="Apellidos es oblligatorio" />
+						<p:password id="nonFeedback" value="#{userServer.pass}"
+							required="true" requiredMessage="Apellidos es oblligatorio" />
 
 
 						<p:outputLabel value="Complete name:" />
-						<p:inputText value="#{userServer.complete_name}"
-							required="true" requiredMessage="Direccion es oblligatorio" />
+						<p:inputText value="#{userServer.complete_name}" required="true"
+							requiredMessage="Direccion es oblligatorio" />
 
 
 
@@ -65,8 +63,9 @@
 							update=":formShowUsers:tableShowUsers" />
 
 						<p:commandButton value="Cancelar"
-							actionListener="#{empleadoBean.cancelar()}" update=":formCreate"
-							immediate="true" onclick="PF('dlgNuevo').hide();" />
+							actionListener="#{ControllerUser.cancelar()}"
+							update=":formCreate" immediate="true"
+							onclick="PF('dlgNuevo').hide();" />
 
 					</p:panelGrid>
 				</h:form>
@@ -98,12 +97,12 @@
 					<p:column headerText="Last name">
 						<h:outputText value="#{VUSERS.last_name}" />
 					</p:column>
-					
-					
+
+
 					<p:column headerText="Email">
 						<h:outputText value="#{VUSERS.email}" />
 					</p:column>
-					
+
 					<p:column headerText="Telephone">
 						<h:outputText value="#{VUSERS.number}" />
 					</p:column>
@@ -136,12 +135,12 @@
 					<p:panelGrid columns="2" style="margin: 0 auto; font-size: 12px;">
 
 						<p:outputLabel value="User id:" />
-						<p:inputText value="#{userServer.id_users}" 
+						<p:inputText value="#{userServer.id_users}"
 							readonly="#{facesContext.renderResponse}" />
-					
+
 						<p:outputLabel value="Username:" />
-						<p:inputText value="#{userServer.username}"
-							required="true" requiredMessage="Nombres es oblligatorio" />
+						<p:inputText value="#{userServer.username}" required="true"
+							requiredMessage="Nombres es oblligatorio" />
 
 						<p:outputLabel value="Password" />
 						<p:inputText value="#{userServer.pass}" required="true"
@@ -149,8 +148,8 @@
 
 
 						<p:outputLabel value="Complete name:" />
-						<p:inputText value="#{userServer.complete_name}"
-							required="true" requiredMessage="Direccion es oblligatorio" />
+						<p:inputText value="#{userServer.complete_name}" required="true"
+							requiredMessage="Direccion es oblligatorio" />
 
 
 
@@ -184,8 +183,9 @@
 				<h:form id="formEliminar" style="font-size: 12px;">
 					<h:outputText value="Desea eliminar este producto:" />
 					<p:inputText value="#{userServer.id_users}" size="4"
-					readonly="#{facesContext.renderResponse}" style="margin-left: 12px;" />
-					
+						readonly="#{facesContext.renderResponse}"
+						style="margin-left: 12px;" />
+
 					<p:commandButton value="Si"
 						action="#{ControllerUser.deleteUser(userServer)}"
 						update=":formShowUsers" oncomplete="PF('dlgEliminar').hide();" />
@@ -194,14 +194,19 @@
 			</p:dialog>
 		</div>
 		<p:dock position="bottom" halign="center">
-			<p:menuitem value="User" icon="/Views/Image/user.png" url="../Views/Principal_Users.xhtml" />
-			<p:menuitem value="Products" icon="/Views/Image/products.png" url="../Views/Products.xhtml" />
-			<p:menuitem value="Principal Menu" icon="/Views/Image/menu.png" url="../Views/PrincipalMenu.xhtml" />
-			<p:menuitem value="Product Type" icon="/Views/Image/productType.png" url="../Views/ProductType.xhtml"/>
-			<p:menuitem value="Product Reference" icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml" />
-			
+			<p:menuitem value="User" icon="/Views/Image/user.png"
+				url="../Views/Principal_Users.xhtml" />
+			<p:menuitem value="Products" icon="/Views/Image/products.png"
+				url="../Views/Products.xhtml" />
+			<p:menuitem value="Principal Menu" icon="/Views/Image/menu.png"
+				url="../Views/PrincipalMenu.xhtml" />
+			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
+				url="../Views/ProductType.xhtml" />
+			<p:menuitem value="Product Reference"
+				icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml" />
+
 		</p:dock>
-		
+
 	</p:panel>
 </h:body>
 </html>

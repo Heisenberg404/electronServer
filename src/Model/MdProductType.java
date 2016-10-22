@@ -41,7 +41,7 @@ public class MdProductType implements Serializable {
 
 			lstProductType.add(rfpt);
 		}
-
+		con.close();
 		return lstProductType;
 
 	}
@@ -59,6 +59,7 @@ public class MdProductType implements Serializable {
 		// Se obtienen la salida del procedimineto almacenado
 		String back = cs.getString(2);
 		System.out.println(back);
+		con.close();
 	}
 
 	public void updateProductType(ProductType pt) throws Exception {
@@ -75,6 +76,7 @@ public class MdProductType implements Serializable {
 		// Se obtienen la salida del procedimineto almacenado
 		String back = cs.getString(3);
 		System.out.println(back);
+		con.close();
 	}
 
 	public void deleteProductType(ProductType pt) throws Exception {
@@ -90,6 +92,7 @@ public class MdProductType implements Serializable {
 		// Se obtienen la salida del procedimineto almacenado
 		String back = cs.getString(2);
 		System.out.println(back);
+		con.close();
 	}
 
 	public void cancelar() throws Exception {
