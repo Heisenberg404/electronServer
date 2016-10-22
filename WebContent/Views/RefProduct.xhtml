@@ -56,7 +56,7 @@
 						<p:commandButton value="Save"
 							action="#{rfproductsController.saveRefProduct(references_product)}"
 							oncomplete="PF('dlgNuevo').hide();"
-							update=":formShowProduct:TableShowRefProduct">
+							update=":formShowProduct:TableShowRefProduct" ajax="false">
 						</p:commandButton>
 
 						<p:commandButton value="Cancel"
