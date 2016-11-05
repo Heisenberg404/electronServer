@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import Beans.Products;
 import Utils.Conection;
 import oracle.jdbc.OracleTypes;
@@ -38,6 +41,14 @@ public class MdProducts {
 		String back = cs.getString(6);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("PRODUCT CREATE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Product was created"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Info!", "Product exist"));
+		}
 	}
 
 	public List<Products> ReadProduct() throws Exception {
@@ -86,6 +97,14 @@ public class MdProducts {
 		String back = cs.getString(7);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("PRODUCT UPDATE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Product was updated"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warn!", "Product does not exist"));
+		}
 	}
 
 	public void deleteProducts(Products prod) throws Exception {
@@ -102,6 +121,14 @@ public class MdProducts {
 		String back = cs.getString(2);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Product was deleted"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warn!", "Product does not exist"));
+		}
 	}
 
 	public void cancelar() throws Exception {

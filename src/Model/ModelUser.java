@@ -45,6 +45,14 @@ public class ModelUser {
 		System.out.println(back);
 		con.close();
 
+		if (back.equals("USER CREATE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "User was created"));
+		} else if (back.equals("USER EXIST")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warn!", "User already exists"));
+		}
+
 	}
 
 	public List<Users> ReadUser() throws Exception {
@@ -96,6 +104,17 @@ public class ModelUser {
 		String back = cs.getString(8);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("USER UPDATE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Inf!", "User was Updated"));
+		} else if (back.equals("USER NO EXIST")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warn!", "User does not exist"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "An error has occurred"));
+		}
 	}
 
 	public void deleteUsers(Users User) throws Exception {
@@ -112,6 +131,14 @@ public class ModelUser {
 		String back = cs.getString(2);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("USER DELETE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Fatal!", "User Was Deleted"));
+		} else if (back.equals("")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "An error has occurred"));
+		}
 	}
 
 	public void iniciarSesion(Users user) throws Exception {
@@ -137,7 +164,7 @@ public class ModelUser {
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "User no existe"));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "User or Pass incorrect"));
 		}
 
 		con.close();

@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import Beans.ProductType;
 import Utils.Conection;
 import oracle.jdbc.OracleTypes;
@@ -60,6 +63,14 @@ public class MdProductType implements Serializable {
 		String back = cs.getString(2);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("TYPE PRODUCT CREATE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Product Type was created"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warn!", "Product Type does not exist"));
+		}
 	}
 
 	public void updateProductType(ProductType pt) throws Exception {
@@ -77,6 +88,14 @@ public class MdProductType implements Serializable {
 		String back = cs.getString(3);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("TYPE PRODUCT UPDATE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Product Type was updated"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warn!", "Product Type does not exist"));
+		}
 	}
 
 	public void deleteProductType(ProductType pt) throws Exception {
@@ -93,6 +112,14 @@ public class MdProductType implements Serializable {
 		String back = cs.getString(2);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("TYPE PRODUCT DELETE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Product Type was deleted"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warn!", "Product Type does not exist"));
+		}
 	}
 
 	public void cancelar() throws Exception {

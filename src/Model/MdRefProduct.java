@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import Beans.ReferencesProduct;
 import Utils.Conection;
 import oracle.jdbc.OracleTypes;
@@ -61,6 +64,14 @@ public class MdRefProduct implements Serializable {
 		String back = cs.getString(5);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("REFERENCE PRODUCT CREATE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Reference Product was created"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warn!", "Reference Product does not exist"));
+		}
 	}
 
 	public void updateRefProduct(ReferencesProduct rp) throws Exception {
@@ -81,6 +92,15 @@ public class MdRefProduct implements Serializable {
 		String back = cs.getString(6);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("REFERENCE PRODUCT UPDATE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Reference Product was updated"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Info!", "Reference Product does not exist"));
+		}
+
 	}
 
 	public void deleteRefProduct(ReferencesProduct rp) throws Exception {
@@ -97,6 +117,14 @@ public class MdRefProduct implements Serializable {
 		String back = cs.getString(2);
 		System.out.println(back);
 		con.close();
+
+		if (back.equals("REFERENCE PRODUCT DELETE")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!", "Reference Product was deleted"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Info!", "Reference Product does not exist"));
+		}
 	}
 
 	public void cancelar() throws Exception {
