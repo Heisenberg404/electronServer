@@ -1,43 +1,44 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Login User</title>
+	<title>Login User</title>
+	<link rel="shortcut icon" href="../Views/Image/electro.ico" type="image/x-icon" />
 </h:head>
 <body>
-<p:panel header="Login" style="height:100%;width:100%">
-    <div class="row" align="center">
-		<img src="../Views/Image/electro.png" width="373px" height="272px" align="top" />
-	</div>
-    <div class="row" align="center">
-	<br>
-	
-	
-	
-	</br>	
-    <h:form >
-        <p:messages autoUpdate="true" showDetail="true" closable="true" style="width: 30%;"/>
-        <h:panelGrid columns="2">
-        	
-            <p:outputLabel for="txtUsuario" value="User" />
-            <p:inputText id="txtUsuario" value="#{userServer.username}" required="true" />
+	<p:panel header="Login" style="height:100%;width:100%">
+		<div class="row" align="center">
+			<img src="../Views/Image/electro.png" width="373px" height="272px"
+				align="top" />
+		</div>
+		<div class="row" align="center">
+			<br> </br>
+			<h:form>
+				<p:messages autoUpdate="true" showDetail="true" closable="true"
+					style="width: 30%;" />
+				<h:panelGrid columns="2">
 
-            <p:outputLabel for="txtPass" value="Password" />
-            <p:password id="txtPass" value="#{userServer.pass}" required="true" />
+					<p:outputLabel for="txtUsuario" value="User" />
+					<p:inputText id="txtUsuario" value="#{userServer.username}"
+						required="true" />
 
-            <h:column />
-            <p:commandButton action="#{ControllerUser.iniciarSesion(userServer)}" 
-                             icon="ui-icon-key" value="Login" />
+					<p:outputLabel for="txtPass" value="Password" />
+					<p:password id="txtPass" value="#{userServer.pass}" required="true" />
 
-        </h:panelGrid>
+					<h:column />
+					<p:commandButton
+						action="#{ControllerUser.iniciarSesion(userServer)}"
+						icon="ui-icon-key" value="Login" />
+
+				</h:panelGrid>
 
 
-    </h:form>
-    </div>
-</p:panel>
+			</h:form>
+		</div>
+	</p:panel>
 
 </body>
 </html>

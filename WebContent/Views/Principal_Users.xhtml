@@ -8,7 +8,8 @@
 	<title>Principal User</title>
 	<f:event listener="#{ControllerUser.checkSession()}"
 		type="preRenderView"></f:event>
-
+	<link rel="stylesheet" type="text/css" href="Styles/style.css" />
+	<link rel="shortcut icon" href="../Views/Image/electro.ico" type="image/x-icon" />
 </h:head>
 <h:body>
 	<p:panel header="Principal Menu Users" style="height:100%;width:100%">
@@ -22,7 +23,18 @@
 				<p:commandButton value="Create user"
 					oncomplete="PF('dlgNuevo').show();" update=":formCreate"
 					style="font-size: 14px;" />
-			</h:form>
+					<p:panelGrid id="header" style="width: 100%; border: none;">
+					<p:column style="width: 10%; text-align: right;">
+						<h:form id="formCloseS">
+							<h:outputText value="#{beanClient.username}"></h:outputText>
+							<p:commandButton value="Logout" icon="ui-icon-closethick"
+								actionListener="#{ControllerUser.closeSession()}"
+								style="font-size: 14px;" />
+						</h:form>
+					</p:column>
+				</p:panelGrid>				
+			</h:form>		
+			
 
 			<p:dialog id="dlgN" header="New User" widgetVar="dlgNuevo"
 				showEffect="explode" hideEffect="explode" modal="true">
@@ -76,7 +88,8 @@
 			<h:form id="formShowUsers">
 				<p:dataTable id="tableShowUsers" var="VUSERS"
 					value="#{ControllerUser.lstUser}"
-					emptyMessage="No hay datos de empleados" style="font-size: 12px;">
+					emptyMessage="No hay datos de empleados" style="font-size: 12px;"
+					paginator="true" paginatorPosition="bottom" rows="10">
 
 					<p:column headerText="Identification code">
 						<h:outputText value="#{VUSERS.id_users}" />
@@ -193,17 +206,15 @@
 				</h:form>
 			</p:dialog>
 		</div>
-		<p:dock position="bottom" halign="center">
-			<p:menuitem value="User" icon="/Views/Image/user.png"
-				url="../Views/Principal_Users.xhtml" />
+		<p:dock position="bottom" halign="center">			
 			<p:menuitem value="Products" icon="/Views/Image/products.png"
-				url="../Views/Products.xhtml" />
+				url="../Views/Products.xhtml" style="color:#190707"/>
 			<p:menuitem value="Principal Menu" icon="/Views/Image/menu.png"
-				url="../Views/PrincipalMenu.xhtml" />
+				url="../Views/PrincipalMenu.xhtml" style="color:#190707"/>
 			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
-				url="../Views/ProductType.xhtml" />
+				url="../Views/ProductType.xhtml" style="color:#190707" />
 			<p:menuitem value="Product Reference"
-				icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml" />
+				icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml" style="color:#190707"/>
 
 		</p:dock>
 

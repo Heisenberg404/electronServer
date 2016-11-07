@@ -7,35 +7,43 @@
 	<title>Principal Menu</title>
 	<f:event listener="#{ControllerUser.checkSession()}"
 		type="preRenderView"></f:event>
-
+	<link rel="stylesheet" type="text/css" href="Styles/style.css" />
+	<link rel="shortcut icon" href="../Views/Image/electro.ico" type="image/x-icon" />
 </h:head>
 
 <h:body>
 	<p:panel header="Principal Menu" style="height:100%;width:100%">
-	<h:form id="form1">
-		<div class="row" align="center">
-			<p:commandButton value="Logout" icon="ui-icon-closethick"
-				actionListener="#{ControllerUser.closeSession()}" />
-
+		<h:form id="form1">
 			<div class="row" align="center">
-				<img src="../Views/Image/electro.png" width="373px" height="272px"
-					style="margin-top: 100px" align="top" />
+				<p:panelGrid id="header" style="width: 100%; border: none;">
+					<p:column style="width: 10%; text-align: right;">
+						<h:form id="formCloseS">
+							<h:outputText value="#{beanClient.username}"></h:outputText>
+							<p:commandButton value="Logout" icon="ui-icon-closethick"
+								actionListener="#{ControllerUser.closeSession()}"
+								style="font-size: 14px;" />
+						</h:form>
+					</p:column>
+				</p:panelGrid>
+				<div class="row" align="center">
+					<img src="../Views/Image/electro.png" width="373px" height="272px"
+						style="margin-top: 60px" align="top" />
+				</div>
 			</div>
-		</div>
-	</h:form>
+		</h:form>
 
-
-	<p:dock position="bottom" halign="center">
-		<p:menuitem value="User" icon="/Views/Image/user.png"
-			url="../Views/Principal_Users.xhtml" />
-		<p:menuitem value="Products" icon="/Views/Image/products.png"
-			url="../Views/Products.xhtml" />
-		<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
-			url="../Views/ProductType.xhtml" />
-		<p:menuitem value="Product Reference"
-			icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml" />
-	</p:dock>
-</p:panel>
+		<p:dock position="bottom" halign="center">
+			<p:menuitem value="User" icon="/Views/Image/user.png"
+				url="../Views/Principal_Users.xhtml" style="color:#190707" />
+			<p:menuitem value="Products" icon="/Views/Image/products.png"
+				url="../Views/Products.xhtml" style="color:#190707" />
+			<p:menuitem value="Product Type" icon="/Views/Image/productType.png"
+				url="../Views/ProductType.xhtml" style="color:#190707" />
+			<p:menuitem value="Product Reference"
+				icon="/Views/Image/references.png" url="../Views/RefProduct.xhtml"
+				style="color:#190707" />
+		</p:dock>
+	</p:panel>
 
 
 

@@ -1,0 +1,11 @@
+.centered td{
+	margin: 0px auto;
+}
+
+.ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd{
+	border: none;
+}
+
+.ui-panelgrid td, .ui-panelgrid tr{
+	border-style: none !important
+}
