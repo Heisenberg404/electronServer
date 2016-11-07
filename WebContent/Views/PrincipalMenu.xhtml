@@ -18,7 +18,7 @@
 				<p:panelGrid id="header" style="width: 100%; border: none;">
 					<p:column style="width: 10%; text-align: right;">
 						<h:form id="formCloseS">
-							<h:outputText value="#{beanClient.username}"></h:outputText>
+							<h:outputText value="#{userServer.username}"></h:outputText><br/>
 							<p:commandButton value="Logout" icon="ui-icon-closethick"
 								actionListener="#{ControllerUser.closeSession()}"
 								style="font-size: 14px;" />

@@ -2,8 +2,10 @@ package Beans;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+@ApplicationScoped
 @ManagedBean(name = "userServer")
 public class Users implements Serializable {
 	
